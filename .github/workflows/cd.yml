@@ -13,4 +13,3 @@ jobs:
           heroku_email: "luis.lemus@alumnos.upm.es"
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "iwvg-devops-lemus-luis" #Must be unique in Heroku
-
