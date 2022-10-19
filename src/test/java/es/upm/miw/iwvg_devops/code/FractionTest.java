@@ -19,15 +19,43 @@ public class FractionTest {
     }
 
     @Test
-    void testFraction() {
-        fraction = new Fraction();
-        assertEquals(1, fraction.getNumerator());
-        assertEquals(1, fraction.getDenominator());
+    void testDecimal() {
+        assertEquals(0.5, fraction.decimal());
     }
 
     @Test
-    void testDecimal() {
-        fraction = new Fraction(1,2);
-        assertEquals(0.5, fraction.decimal());
+    void testIsPropper() {
+        assertEquals(true, fraction.isPropper());
+    }
+
+    @Test
+    void testIsImpropper() {
+        assertEquals(false, fraction.isImpropper());
+    }
+
+    @Test
+    void testIsEquivalent() {
+        assertEquals(true, fraction.isEquivalent(new Fraction(2,4)));
+    }
+
+    @Test
+    void testMultiply() {
+        Fraction fractionToMultiply = fraction.multiply(new Fraction(1, 2));
+        assertEquals(1, fractionToMultiply.getNumerator());
+        assertEquals(4, fractionToMultiply.getDenominator());
+    }
+
+    @Test
+    void testDivide() {
+        Fraction fractionToDivide = fraction.divide(new Fraction(1, 2));
+        assertEquals(2, fractionToDivide.getNumerator());
+        assertEquals(2, fractionToDivide.getDenominator());
+    }
+
+    @Test
+    void testAdd() {
+        Fraction fractionAdd = fraction.add(new Fraction(3,4));
+        assertEquals(4, fractionAdd.getNumerator());
+        assertEquals(2, fractionAdd.getDenominator());
     }
 }
