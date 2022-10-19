@@ -1,5 +1,10 @@
 package es.upm.miw.iwvg_devops.code;
 
+import org.apache.logging.log4j.LogManager;
+
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 /**
  * Conceptos: Las fracciones propias son aquellas cuyo numerador es menor que el denominador
  * <p>
@@ -26,7 +31,6 @@ package es.upm.miw.iwvg_devops.code;
  */
 public class Fraction {
     private int numerator;
-
     private int denominator;
 
     public Fraction(int numerator, int denominator) {
@@ -56,6 +60,43 @@ public class Fraction {
 
     public double decimal() {
         return (double) numerator / denominator;
+    }
+
+    public boolean isPropper() {
+        return this.numerator < this.denominator;
+    }
+
+    public boolean isImpropper() {
+        return this.numerator > this.denominator;
+    }
+
+    public boolean isEquivalent(Fraction otherFraction) {
+        return (this.numerator * otherFraction.denominator) == (otherFraction.numerator * this.denominator);
+    }
+    public Fraction add(Fraction fraction) {
+        return new Fraction(this.numerator + fraction.numerator, commonDenominator(fraction));
+    }
+
+    public Fraction multiply(Fraction otherFraction) {
+        return new Fraction(this.numerator * otherFraction.numerator, this.denominator * otherFraction.denominator);
+    }
+
+    public Fraction divide(Fraction otherFraction) {
+        return new Fraction(this.numerator * otherFraction.denominator, this.denominator * otherFraction.numerator);
+    }
+
+    private Integer commonDenominator(Fraction otherFraction) {
+        int minDenominator = Stream.of(this.denominator, otherFraction.denominator)
+                .min(Integer::compare)
+                .orElseThrow();
+
+        LogManager.getLogger(this.getClass()).info("minDenominator: " + String.valueOf(minDenominator));
+
+        return IntStream.range(2, minDenominator+1)
+                .peek(denominator -> LogManager.getLogger(this.getClass()).info("denominator: " + String.valueOf(denominator)))
+                .filter(i -> (this.denominator % i == 0 && otherFraction.denominator % i == 0))
+                .peek(denominator -> LogManager.getLogger(this.getClass()).info("denominator: " + String.valueOf(denominator)))
+                .max().orElse(1);
     }
 
     @Override
