@@ -73,16 +73,16 @@ public class Fraction {
 
     public Fraction addition(Fraction otherFraction) {
         Integer commonDenominator = commonDenominator(otherFraction);
-        Fraction result = new Fraction((this.numerator * (commonDenominator / this.getDenominator())) +
+        return new Fraction((this.numerator * (commonDenominator / this.getDenominator())) +
                 (otherFraction.numerator * (commonDenominator / otherFraction.getDenominator())), commonDenominator);
-        return result;
+
     }
 
     public Fraction subtraction(Fraction otherFraction) {
         Integer commonDenominator = commonDenominator(otherFraction);
-        Fraction result = new Fraction((this.numerator * (commonDenominator / this.getDenominator())) -
+        return new Fraction((this.numerator * (commonDenominator / this.getDenominator())) -
                 (otherFraction.numerator * (commonDenominator / otherFraction.getDenominator())), commonDenominator);
-        return result;
+
     }
 
     public Fraction multiply(Fraction otherFraction) {
