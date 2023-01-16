@@ -1,6 +1,5 @@
 package es.upm.miw.iwvg_devops.code;
 
-import org.apache.logging.log4j.LogManager;
 import java.util.stream.Stream;
 
 /**
@@ -74,19 +73,15 @@ public class Fraction {
 
     public Fraction addition(Fraction otherFraction) {
         Integer commonDenominator = commonDenominator(otherFraction);
-        LogManager.getLogger(this.getClass()).info("commonDenominator: " + commonDenominator);
         Fraction result = new Fraction((this.numerator * (commonDenominator / this.getDenominator())) +
                 (otherFraction.numerator * (commonDenominator / otherFraction.getDenominator())), commonDenominator);
-        LogManager.getLogger(this.getClass()).info("resultado de suma: " + result.getNumerator() + "," + result.getDenominator());
         return result;
     }
 
     public Fraction subtraction(Fraction otherFraction) {
         Integer commonDenominator = commonDenominator(otherFraction);
-        LogManager.getLogger(this.getClass()).info("commonDenominator: " + commonDenominator);
         Fraction result = new Fraction((this.numerator * (commonDenominator / this.getDenominator())) -
                 (otherFraction.numerator * (commonDenominator / otherFraction.getDenominator())), commonDenominator);
-        LogManager.getLogger(this.getClass()).info("resultado de suma: " + result.getNumerator() + "," + result.getDenominator());
         return result;
     }
 
