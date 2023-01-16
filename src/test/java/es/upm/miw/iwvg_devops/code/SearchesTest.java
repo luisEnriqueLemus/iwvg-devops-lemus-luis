@@ -20,4 +20,9 @@ class SearchesTest {
     void testFindFractionAdditionByUserId(){
         assertEquals(2, new Searches().findFractionAdditionByUserId("4").decimal());
     }
+
+    @Test
+    void testFindFractionSubtractionByUserName(){
+        assertEquals(-1, new Searches().findFractionSubtractionByUserName("Paula").decimal());
+    }
 }
