@@ -15,4 +15,9 @@ class SearchesTest {
     void testFindUserIdBySomeProperFraction() {
         assertEquals(List.of("1", "2", "3", "5"), new Searches().findUserIdBySomeProperFraction().collect(Collectors.toList()));
     }
+
+    @Test
+    void testFindFractionAdditionByUserId(){
+        assertEquals(2, new Searches().findFractionAdditionByUserId("4").decimal());
+    }
 }

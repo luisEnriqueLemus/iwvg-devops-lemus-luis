@@ -17,4 +17,11 @@ public class Searches {
                         .anyMatch(Fraction::isPropper))
                 .map(User::getId);
     }
+
+    public Fraction findFractionAdditionByUserId(String id) {
+        return new UsersDatabase().findAll()
+                .filter(user -> id.equals(user.getId()))
+                .flatMap(user -> user.getFractions().stream())
+                .reduce(new Fraction(0,1), (acumulatedFraction, fractionI)-> acumulatedFraction.addition(fractionI));
+    }
 }

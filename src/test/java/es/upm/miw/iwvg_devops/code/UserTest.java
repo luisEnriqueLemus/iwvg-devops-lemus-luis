@@ -2,14 +2,12 @@ package es.upm.miw.iwvg_devops.code;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserTest {
-
     private User user;
 
     @BeforeEach
@@ -55,6 +53,7 @@ class UserTest {
         assertEquals("Luis Enrique", user.getName());
     }
 
+    @Test
     void testGetFamilyName() {
         user.setFamilyName("Lemus Hernandez");
         assertEquals("Lemus Hernandez", user.getFamilyName());
