@@ -10,4 +10,9 @@ class SearchesTest {
     void testFindDecimalFractionByUserName() {
         assertEquals(List.of(2.0, -0.2, 0.5, 1.3333333333333333), new Searches().findDecimalFractionByUserName("Ana").collect(Collectors.toList()));
     }
+
+    @Test
+    void testFindUserIdBySomeProperFraction() {
+        assertEquals(List.of("1", "2", "3", "5"), new Searches().findUserIdBySomeProperFraction().collect(Collectors.toList()));
+    }
 }
