@@ -2,7 +2,8 @@ package es.upm.miw.iwvg_devops.code;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FractionTest {
     private Fraction fraction;
@@ -25,17 +26,17 @@ public class FractionTest {
 
     @Test
     void testIsPropper() {
-        assertEquals(true, fraction.isPropper());
+        assertTrue(fraction.isPropper());
     }
 
     @Test
     void testIsImpropper() {
-        assertEquals(false, fraction.isImpropper());
+        assertFalse(fraction.isImpropper());
     }
 
     @Test
     void testIsEquivalent() {
-        assertEquals(true, fraction.isEquivalent(new Fraction(2,4)));
+        assertTrue(fraction.isEquivalent(new Fraction(2,4)));
     }
 
     @Test
@@ -53,9 +54,9 @@ public class FractionTest {
     }
 
     @Test
-    void testAdd() {
-        Fraction fractionAdd = fraction.add(new Fraction(3,4));
-        assertEquals(4, fractionAdd.getNumerator());
-        assertEquals(2, fractionAdd.getDenominator());
+    void testAddition() {
+        Fraction fractionAddition = fraction.addition(new Fraction(3,4));
+        assertEquals(5, fractionAddition.getNumerator());
+        assertEquals(4, fractionAddition.getDenominator());
     }
 }
