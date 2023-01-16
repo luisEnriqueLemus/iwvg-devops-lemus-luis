@@ -28,10 +28,6 @@ public class UserTest {
 
     @Test
     void testUserParams() {
-        List<Fraction> fractions;
-        fractions = null;
-        fractions.add(new Fraction(1,2));
-        fractions.add(new Fraction(1,3));
         assertEquals("1804198104433", user.getId());
         assertEquals("Luis Enrique", user.getName());
         assertEquals("Lemus Hernandez", user.getFamilyName());
@@ -46,6 +42,22 @@ public class UserTest {
     @Test
     void testInitials() {
         assertEquals("L.", user.initials());
+    }
+
+    @Test
+    void testGetId() {
+        assertEquals("1804198104433", user.getId());
+    }
+
+    @Test
+    void testGetName() {
+        user.setName("Luis Enrique");
+        assertEquals("Luis Enrique", user.getName());
+    }
+
+    void testGetFamilyName() {
+        user.setFamilyName("Lemus Hernandez");
+        assertEquals("Lemus Hernandez", user.getFamilyName());
     }
 
     @Test

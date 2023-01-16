@@ -1,8 +1,6 @@
 package es.upm.miw.iwvg_devops.code;
 
 import org.apache.logging.log4j.LogManager;
-
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -73,8 +71,23 @@ public class Fraction {
     public boolean isEquivalent(Fraction otherFraction) {
         return (this.numerator * otherFraction.denominator) == (otherFraction.numerator * this.denominator);
     }
-    public Fraction add(Fraction fraction) {
-        return new Fraction(this.numerator + fraction.numerator, commonDenominator(fraction));
+
+    public Fraction addition(Fraction otherFraction) {
+        Integer commonDenominator = commonDenominator(otherFraction);
+        LogManager.getLogger(this.getClass()).info("commonDenominator: " + commonDenominator);
+        Fraction result = new Fraction((this.numerator * (commonDenominator / this.getDenominator())) +
+                (otherFraction.numerator * (commonDenominator / otherFraction.getDenominator())), commonDenominator);
+        LogManager.getLogger(this.getClass()).info("resultado de suma: " + result.getNumerator() + "," + result.getDenominator());
+        return result;
+    }
+
+    public Fraction subtraction(Fraction otherFraction) {
+        Integer commonDenominator = commonDenominator(otherFraction);
+        LogManager.getLogger(this.getClass()).info("commonDenominator: " + commonDenominator);
+        Fraction result = new Fraction((this.numerator * (commonDenominator / this.getDenominator())) -
+                (otherFraction.numerator * (commonDenominator / otherFraction.getDenominator())), commonDenominator);
+        LogManager.getLogger(this.getClass()).info("resultado de suma: " + result.getNumerator() + "," + result.getDenominator());
+        return result;
     }
 
     public Fraction multiply(Fraction otherFraction) {
@@ -86,17 +99,13 @@ public class Fraction {
     }
 
     private Integer commonDenominator(Fraction otherFraction) {
-        int minDenominator = Stream.of(this.denominator, otherFraction.denominator)
-                .min(Integer::compare)
-                .orElseThrow();
-
-        LogManager.getLogger(this.getClass()).info("minDenominator: " + String.valueOf(minDenominator));
-
-        return IntStream.range(2, minDenominator+1)
-                .peek(denominator -> LogManager.getLogger(this.getClass()).info("denominator: " + String.valueOf(denominator)))
-                .filter(i -> (this.denominator % i == 0 && otherFraction.denominator % i == 0))
-                .peek(denominator -> LogManager.getLogger(this.getClass()).info("denominator: " + String.valueOf(denominator)))
-                .max().orElse(1);
+        int largestDenominator = Stream.of(this.denominator, otherFraction.denominator)
+                .reduce(Integer::max)
+                .orElse(1);
+        return Stream.iterate(largestDenominator, multiples -> multiples + largestDenominator)
+                .limit(100)
+                .filter(multiple -> ((this.denominator *  multiple) % multiple == 0 && (otherFraction.denominator * multiple) % multiple == 0))
+                .findFirst().orElse(1);
     }
 
     @Override
