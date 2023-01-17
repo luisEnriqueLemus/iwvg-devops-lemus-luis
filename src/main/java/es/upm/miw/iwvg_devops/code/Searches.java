@@ -2,6 +2,7 @@ package es.upm.miw.iwvg_devops.code;
 
 import java.util.stream.Stream;
 
+//agregado para simular corrección de busqueda 3
 public class Searches {
      public Stream<Double> findDecimalFractionByUserName(String nameUser) {
         return new UsersDatabase().findAll()
